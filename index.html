@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard Nacional Verssato</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Montserrat',sans-serif;
+}
+
+body{
+background:#f3f3f3;
+padding:15px;
+}
+
+.header{
+background:#d60000;
+color:white;
+border-radius:18px;
+padding:18px;
+margin-bottom:15px;
+text-align:center;
+box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.header h1{
+font-size:28px;
+font-weight:800;
+}
+
+.header p{
+font-size:13px;
+margin-top:5px;
+}
+
+.kpis{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:12px;
+margin-bottom:15px;
+}
+
+.kpi-card{
+background:white;
+border-radius:18px;
+padding:15px;
+border-top:5px solid #d60000;
+box-shadow:0 3px 10px rgba(0,0,0,0.06);
+}
+
+.kpi-label{
+font-size:11px;
+color:#777;
+font-weight:700;
+}
+
+.kpi-value{
+font-size:30px;
+font-weight:800;
+color:#d60000;
+margin-top:6px;
+}
+
+.filters{
+display:flex;
+gap:12px;
+margin-bottom:15px;
+}
+
+.filters select{
+background:white;
+border:none;
+border-radius:12px;
+padding:12px;
+font-size:14px;
+font-weight:700;
+box-shadow:0 3px 10px rgba(0,0,0,0.06);
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+margin-bottom:15px;
+}
+
+.card{
+background:white;
+border-radius:18px;
+padding:15px;
+border-top:5px solid #d60000;
+box-shadow:0 3px 10px rgba(0,0,0,0.06);
+}
+
+.name{
+font-size:17px;
+font-weight:800;
+color:#222;
+}
+
+.store{
+font-size:11px;
+color:#777;
+margin-top:2px;
+}
+
+.percent{
+text-align:center;
+font-size:42px;
+font-weight:800;
+color:#d60000;
+margin-top:8px;
+}
+
+.progress{
+width:100%;
+height:14px;
+background:#ececec;
+border-radius:20px;
+overflow:hidden;
+margin-top:10px;
+}
+
+.bar{
+height:100%;
+border-radius:20px;
+}
+
+.info-row{
+display:flex;
+gap:12px;
+margin-top:12px;
+}
+
+.info{
+flex:1;
+}
+
+.box{
+background:#f7f7f7;
+border-radius:12px;
+padding:10px;
+margin-bottom:8px;
+}
+
+.label{
+font-size:11px;
+color:#777;
+}
+
+.value{
+font-size:20px;
+font-weight:700;
+color:#222;
+margin-top:2px;
+}
+
+.faltante-box{
+background:#e8fff1;
+border:2px solid #8ff0b5;
+}
+
+.faltante-value{
+color:#00a651;
+font-weight:800;
+}
+
+.mini-chart{
+width:200px;
+height:220px;
+display:flex;
+justify-content:center;
+align-items:flex-end;
+}
+
+.chart-bars{
+display:flex;
+gap:20px;
+align-items:flex-end;
+height:180px;
+}
+
+.chart-col{
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
+.chart-bar{
+width:50px;
+border-radius:6px 6px 0 0;
+}
+
+.chart-ventas{
+background:#00b74a;
+}
+
+.chart-meta{
+background:#d60000;
+}
+
+.chart-text{
+font-size:9px;
+font-weight:700;
+margin-top:4px;
+}
+
+.commission{
+margin-top:8px;
+background:#d60000;
+color:white;
+text-align:center;
+padding:10px;
+border-radius:12px;
+font-size:11px;
+font-weight:700;
+}
+
+.bottom{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:12px;
+}
+
+.section{
+background:white;
+border-radius:18px;
+padding:15px;
+box-shadow:0 3px 10px rgba(0,0,0,0.06);
+}
+
+.section h2{
+font-size:16px;
+margin-bottom:12px;
+color:#222;
+}
+
+.rank-item{
+display:flex;
+justify-content:space-between;
+background:#f7f7f7;
+padding:10px;
+border-radius:10px;
+margin-bottom:8px;
+font-size:13px;
+font-weight:700;
+}
+
+.alert-card{
+background:#d60000;
+color:white;
+padding:12px;
+border-radius:12px;
+margin-bottom:8px;
+font-size:12px;
+font-weight:700;
+}
+
+@media(max-width:1200px){
+
+.cards{
+grid-template-columns:repeat(2,1fr);
+}
+
+.kpis{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media(max-width:768px){
+
+.cards{
+grid-template-columns:1fr;
+}
+
+.kpis{
+grid-template-columns:1fr;
+}
+
+.bottom{
+grid-template-columns:1fr;
+}
+
+.info-row{
+flex-direction:column;
+}
+
+.mini-chart{
+width:100%;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<h1>REPORTE DE METAS VERSSATO</h1>
+
+<p>
+Dashboard Nacional Automatizado
+</p>
+
+</div>
+
+<div class="kpis">
+
+<div class="kpi-card">
+<div class="kpi-label">VENTAS TOTALES</div>
+<div class="kpi-value" id="ventasTotales">$0</div>
+</div>
+
+<div class="kpi-card">
+<div class="kpi-label">CUMPLIMIENTO PROMEDIO</div>
+<div class="kpi-value" id="cumplimientoPromedio">0%</div>
+</div>
+
+<div class="kpi-card">
+<div class="kpi-label">COMISIONES</div>
+<div class="kpi-value" id="comisionesTotales">$0</div>
+</div>
+
+<div class="kpi-card">
+<div class="kpi-label">VENDEDORES</div>
+<div class="kpi-value" id="totalVendedores">0</div>
+</div>
+
+</div>
+
+<div class="filters">
+
+<select id="filtroTienda">
+
+<option value="TODAS">
+Todas las tiendas
+</option>
+
+</select>
+
+<select id="filtroMes">
+
+<option value="TODOS">
+Todos los meses
+</option>
+
+</select>
+
+</div>
+
+<div id="cardsContainer" class="cards">
+
+</div>
+
+<div class="bottom">
+
+<div class="section">
+
+<h2>RANKING GENERAL</h2>
+
+<div id="rankingContainer">
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>TOP TIENDAS</h2>
+
+<div id="topTiendas">
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>ALERTAS DEL SUPERVISOR</h2>
+
+<div id="alertasSupervisor">
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const CSV_URL =
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vT1g_CnA_BKGzkMwfbTEJ6CK68A6yl3T12izhCsM8vAf-RNeT7SF3WYiPNzcPA_fhaNG2q2mvEaIty_/pub?gid=702074641&single=true&output=csv";
+
+let datos = [];
+
+async function cargarDatos(){
+
+try{
+
+const respuesta =
+await fetch(CSV_URL);
+
+const texto =
+await respuesta.text();
+
+const filas =
+texto.trim().split("\n");
+
+const encabezados =
+filas[0]
+.split(",")
+.map(h => h.trim());
+
+datos =
+filas.slice(1).map(fila=>{
+
+const valores =
+fila.split(",");
+
+let obj = {};
+
+encabezados.forEach((campo,index)=>{
+
+obj[campo] =
+(valores[index] || "")
+.replace(/"/g,"")
+.trim();
+
+});
+
+return obj;
+
+});
+
+cargarFiltros();
+actualizarDashboard();
+
+}
+catch(error){
+
+console.log(error);
+
+document.getElementById(
+"cardsContainer"
+).innerHTML =
+"<h2>Error cargando Google Sheets</h2>";
+
+}
+
+}
+
+function cargarFiltros(){
+
+const tiendas =
+[...new Set(
+datos.map(x=>x.TIENDA)
+)];
+
+const meses =
+[...new Set(
+datos.map(x=>x.MES)
+)];
+
+const filtroTienda =
+document.getElementById(
+"filtroTienda"
+);
+
+const filtroMes =
+document.getElementById(
+"filtroMes"
+);
+
+tiendas.sort();
+meses.sort();
+
+tiendas.forEach(tienda=>{
+
+let option =
+document.createElement("option");
+
+option.value =
+tienda;
+
+option.textContent =
+tienda;
+
+filtroTienda.appendChild(
+option
+);
+
+});
+
+meses.forEach(mes=>{
+
+let option =
+document.createElement("option");
+
+option.value =
+mes;
+
+option.textContent =
+mes;
+
+filtroMes.appendChild(
+option
+);
+
+});
+
+filtroTienda.addEventListener(
+"change",
+actualizarDashboard
+);
+
+filtroMes.addEventListener(
+"change",
+actualizarDashboard
+);
+
+}
+
+function actualizarDashboard(){
+
+const tienda =
+document.getElementById(
+"filtroTienda"
+).value;
+
+const mes =
+document.getElementById(
+"filtroMes"
+).value;
+
+let filtrados =
+datos.filter(item=>{
+
+let cumpleTienda =
+
+tienda === "TODAS"
+
+||
+
+item.TIENDA === tienda;
+
+let cumpleMes =
+
+mes === "TODOS"
+
+||
+
+item.MES === mes;
+
+return cumpleTienda &&
+cumpleMes;
+
+});
+
+generarKPIs(
+filtrados
+);
+
+generarTarjetas(
+filtrados
+);
+
+generarRanking(
+filtrados
+);
+
+generarTopTiendas(
+filtrados
+);
+
+generarAlertas(
+filtrados
+);
+
+}
+
+function generarKPIs(lista){
+
+let ventas = 0;
+let cumplimiento = 0;
+let comisiones = 0;
+
+lista.forEach(v=>{
+
+ventas +=
+Number(
+v.PRECIOFACTURANEGOCIADO
+) || 0;
+
+cumplimiento +=
+Number(
+v.CUMPLIMIENTO
+) || 0;
+
+comisiones +=
+Number(
+v.COMISION
+) || 0;
+
+});
+
+document.getElementById(
+"ventasTotales"
+).innerHTML =
+"$" +
+ventas.toLocaleString();
+
+document.getElementById(
+"cumplimientoPromedio"
+).innerHTML =
+
+lista.length > 0
+
+?
+
+Math.round(
+cumplimiento /
+lista.length
+) + "%"
+
+:
+
+"0%";
+
+document.getElementById(
+"comisionesTotales"
+).innerHTML =
+"$" +
+comisiones.toLocaleString();
+
+document.getElementById(
+"totalVendedores"
+).innerHTML =
+lista.length;
+
+}
+
+function generarTarjetas(lista){
+
+const container =
+document.getElementById(
+"cardsContainer"
+);
+
+container.innerHTML = "";
+
+lista.forEach(v=>{
+
+let ventas =
+Number(
+v.PRECIOFACTURANEGOCIADO
+) || 0;
+
+let meta =
+Number(
+v.META
+) || 0;
+
+let cumplimiento =
+Number(
+v.CUMPLIMIENTO
+) || 0;
+
+let faltante =
+Number(
+v["FALTANTE META"]
+) || 0;
+
+let comision =
+Number(
+v.COMISION
+) || 0;
+
+let color =
+"#ff4444";
+
+if(cumplimiento >= 100){
+
+color =
+"#00b74a";
+
+}
+else if(cumplimiento >= 90){
+
+color =
+"#ffbb33";
+
+}
+else if(cumplimiento >= 70){
+
+color =
+"#ff8800";
+
+}
+
+let alturaMeta =
+140;
+
+let alturaVenta =
+
+meta > 0
+
+?
+
+(ventas/meta)
+*
+140
+
+:
+
+0;
+
+if(
+alturaVenta >
+140
+){
+
+alturaVenta =
+140;
+
+}
+
+container.innerHTML += `
+
+<div class="card">
+
+<div class="name">
+${v.VENDEDOR}
+</div>
+
+<div class="store">
+${v.TIENDA}
+</div>
+
+<div class="percent">
+${cumplimiento}%
+</div>
+
+<div class="progress">
+
+<div
+class="bar"
+style="
+width:${cumplimiento}%;
+background:${color};
+">
+</div>
+
+</div>
+
+<div class="info-row">
+
+<div class="info">
+
+<div class="box">
+<div class="label">
+VENTAS
+</div>
+<div class="value">
+$${ventas}
+</div>
+</div>
+
+<div class="box">
+<div class="label">
+META
+</div>
+<div class="value">
+$${meta}
+</div>
+</div>
+
+<div class="box faltante-box">
+<div class="label">
+FALTANTE
+</div>
+<div class="value faltante-value">
+$${faltante}
+</div>
+</div>
+
+</div>
+
+<div class="mini-chart">
+
+<div class="chart-bars">
+
+<div class="chart-col">
+
+<div
+class="chart-bar chart-ventas"
+style="
+height:${alturaVenta}px;
+">
+</div>
+
+<div class="chart-text">
+VENTA
+</div>
+
+</div>
+
+<div class="chart-col">
+
+<div
+class="chart-bar chart-meta"
+style="
+height:140px;
+">
+</div>
+
+<div class="chart-text">
+META
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="commission">
+
+COMISIÓN:
+$${comision}
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+function generarRanking(lista){
+
+const ranking =
+document.getElementById(
+"rankingContainer"
+);
+
+ranking.innerHTML = "";
+
+let ordenados =
+[...lista].sort((a,b)=>
+
+(Number(b.CUMPLIMIENTO)||0)
+
+-
+
+(Number(a.CUMPLIMIENTO)||0)
+
+);
+
+ordenados
+.slice(0,10)
+.forEach(v=>{
+
+ranking.innerHTML += `
+
+<div class="rank-item">
+
+<span>
+${v.VENDEDOR}
+</span>
+
+<span>
+${v.CUMPLIMIENTO}%
+</span>
+
+</div>
+
+`;
+
+});
+
+}
+
+function generarTopTiendas(lista){
+
+const container =
+document.getElementById(
+"topTiendas"
+);
+
+container.innerHTML = "";
+
+let tiendas = {};
+
+lista.forEach(v=>{
+
+let tienda =
+v.TIENDA;
+
+if(!tiendas[tienda]){
+
+tiendas[tienda] = {
+ventas:0
+};
+
+}
+
+tiendas[tienda].ventas +=
+Number(
+v.PRECIOFACTURANEGOCIADO
+) || 0;
+
+});
+
+let rankingTiendas =
+Object.entries(tiendas)
+.sort((a,b)=>
+
+b[1].ventas -
+a[1].ventas
+
+);
+
+rankingTiendas
+.slice(0,10)
+.forEach(t=>{
+
+container.innerHTML += `
+
+<div class="rank-item">
+
+<span>
+${t[0]}
+</span>
+
+<span>
+$${Math.round(
+t[1].ventas
+)}
+</span>
+
+</div>
+
+`;
+
+});
+
+}
+
+function generarAlertas(lista){
+
+const container =
+document.getElementById(
+"alertasSupervisor"
+);
+
+container.innerHTML = "";
+
+let bajo70 =
+lista.filter(v=>
+
+(Number(
+v.CUMPLIMIENTO
+)||0)
+
+<
+
+70
+
+);
+
+let sobre100 =
+lista.filter(v=>
+
+(Number(
+v.CUMPLIMIENTO
+)||0)
+
+>=
+
+100
+
+);
+
+if(
+bajo70.length > 0
+){
+
+container.innerHTML += `
+
+<div class="alert-card">
+
+${bajo70.length}
+ vendedores están por debajo
+del 70% de cumplimiento.
+
+</div>
+
+`;
+
+}
+
+if(
+sobre100.length > 0
+){
+
+container.innerHTML += `
+
+<div class="alert-card">
+
+${sobre100.length}
+ vendedores ya superaron
+su meta.
+
+</div>
+
+`;
+
+}
+
+if(
+bajo70.length === 0
+&&
+sobre100.length === 0
+){
+
+container.innerHTML += `
+
+<div class="alert-card">
+
+Sin alertas importantes.
+
+</div>
+
+`;
+
+}
+
+}
+
+cargarDatos();
+
+</script>
+
+</body>
+</html>
