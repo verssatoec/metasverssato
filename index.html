@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Dashboard Nacional Verssato</title>
+<title>Dashboard Verssato</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 
@@ -23,6 +23,8 @@ body{
 background:#f3f3f3;
 padding:15px;
 }
+
+/* HEADER */
 
 .header{
 background:#d60000;
@@ -44,49 +46,27 @@ font-size:13px;
 margin-top:5px;
 }
 
-.kpis{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:12px;
-margin-bottom:15px;
-}
+/* FILTRO */
 
-.kpi-card{
+.filtro{
 background:white;
-border-radius:18px;
 padding:15px;
-border-top:5px solid #d60000;
+border-radius:18px;
+margin-bottom:15px;
 box-shadow:0 3px 10px rgba(0,0,0,0.06);
 }
 
-.kpi-label{
-font-size:11px;
-color:#777;
-font-weight:700;
-}
-
-.kpi-value{
-font-size:30px;
-font-weight:800;
-color:#d60000;
-margin-top:6px;
-}
-
-.filters{
-display:flex;
-gap:12px;
-margin-bottom:15px;
-}
-
-.filters select{
-background:white;
-border:none;
-border-radius:12px;
+.filtro select{
+width:100%;
 padding:12px;
+border:2px solid #d60000;
+border-radius:12px;
 font-size:14px;
 font-weight:700;
-box-shadow:0 3px 10px rgba(0,0,0,0.06);
+outline:none;
 }
+
+/* CARDS */
 
 .cards{
 display:grid;
@@ -107,12 +87,7 @@ box-shadow:0 3px 10px rgba(0,0,0,0.06);
 font-size:17px;
 font-weight:800;
 color:#222;
-}
-
-.store{
-font-size:11px;
-color:#777;
-margin-top:2px;
+min-height:42px;
 }
 
 .percent{
@@ -141,6 +116,7 @@ border-radius:20px;
 display:flex;
 gap:12px;
 margin-top:12px;
+align-items:flex-start;
 }
 
 .info{
@@ -176,8 +152,10 @@ color:#00a651;
 font-weight:800;
 }
 
+/* GRAFICO */
+
 .mini-chart{
-width:200px;
+width:180px;
 height:220px;
 display:flex;
 justify-content:center;
@@ -216,6 +194,19 @@ font-weight:700;
 margin-top:4px;
 }
 
+.alert{
+margin-top:10px;
+background:#fff3f3;
+border:1px solid #ffd7d7;
+padding:10px;
+border-radius:12px;
+text-align:center;
+color:#d60000;
+font-size:11px;
+font-weight:700;
+line-height:1.4;
+}
+
 .commission{
 margin-top:8px;
 background:#d60000;
@@ -227,13 +218,15 @@ font-size:11px;
 font-weight:700;
 }
 
+/* BOTTOM */
+
 .bottom{
-display:grid;
-grid-template-columns:1fr 1fr 1fr;
+display:flex;
 gap:12px;
 }
 
 .section{
+flex:1;
 background:white;
 border-radius:18px;
 padding:15px;
@@ -257,40 +250,49 @@ font-size:13px;
 font-weight:700;
 }
 
-.alert-card{
+.first{
+background:#ffe8a3;
+}
+
+.goal-box{
+background:#fff3f3;
+border:1px solid #ffd7d7;
+border-radius:12px;
+padding:12px;
+line-height:1.8;
+font-size:13px;
+font-weight:600;
+color:#444;
+}
+
+.supervisor-alert{
 background:#d60000;
 color:white;
-padding:12px;
 border-radius:12px;
-margin-bottom:8px;
-font-size:12px;
-font-weight:700;
+padding:15px;
+line-height:1.8;
+font-size:13px;
+font-weight:600;
 }
 
-@media(max-width:1200px){
+/* RESPONSIVE */
+
+@media(max-width:1100px){
 
 .cards{
 grid-template-columns:repeat(2,1fr);
 }
 
-.kpis{
-grid-template-columns:repeat(2,1fr);
 }
 
-}
-
-@media(max-width:768px){
+@media(max-width:700px){
 
 .cards{
-grid-template-columns:1fr;
-}
-
-.kpis{
 grid-template-columns:1fr;
 }
 
 .bottom{
-grid-template-columns:1fr;
+flex-direction:column;
 }
 
 .info-row{
@@ -314,56 +316,24 @@ width:100%;
 <h1>REPORTE DE METAS VERSSATO</h1>
 
 <p>
-Dashboard Nacional Automatizado
+Análisis y Reporte Detallado de Ventas por Vendedor
 </p>
 
 </div>
 
-<div class="kpis">
+<div class="filtro">
 
-<div class="kpi-card">
-<div class="kpi-label">VENTAS TOTALES</div>
-<div class="kpi-value" id="ventasTotales">$0</div>
-</div>
-
-<div class="kpi-card">
-<div class="kpi-label">CUMPLIMIENTO PROMEDIO</div>
-<div class="kpi-value" id="cumplimientoPromedio">0%</div>
-</div>
-
-<div class="kpi-card">
-<div class="kpi-label">COMISIONES</div>
-<div class="kpi-value" id="comisionesTotales">$0</div>
-</div>
-
-<div class="kpi-card">
-<div class="kpi-label">VENDEDORES</div>
-<div class="kpi-value" id="totalVendedores">0</div>
-</div>
-
-</div>
-
-<div class="filters">
-
-<select id="filtroTienda">
+<select id="selectorTienda">
 
 <option value="TODAS">
-Todas las tiendas
-</option>
-
-</select>
-
-<select id="filtroMes">
-
-<option value="TODOS">
-Todos los meses
+TODAS LAS TIENDAS
 </option>
 
 </select>
 
 </div>
 
-<div id="cardsContainer" class="cards">
+<div class="cards" id="cardsContainer">
 
 </div>
 
@@ -381,9 +351,13 @@ Todos los meses
 
 <div class="section">
 
-<h2>TOP TIENDAS</h2>
+<h2>META DEL DÍA</h2>
 
-<div id="topTiendas">
+<div class="goal-box">
+
+- 6 pares diarios<br>
+- $180 promedio diario<br>
+- 3 tickets mayores a $25
 
 </div>
 
@@ -391,9 +365,32 @@ Todos los meses
 
 <div class="section">
 
-<h2>ALERTAS DEL SUPERVISOR</h2>
+<h2>RESUMEN DE TIENDA</h2>
 
-<div id="alertasSupervisor">
+<div class="goal-box">
+
+Ventas Totales:
+<b id="totalVentas">$0</b>
+
+<br><br>
+
+Meta Total:
+<b id="totalMeta">$0</b>
+
+<br><br>
+
+Cumplimiento:
+<b id="totalCumplimiento">0%</b>
+
+<br><br>
+
+Pares:
+<b id="totalPares">0</b>
+
+<br><br>
+
+Comisiones:
+<b id="totalComisiones">$0</b>
 
 </div>
 
@@ -403,356 +400,136 @@ Todos los meses
 
 <script>
 
-const CSV_URL =
-"https://docs.google.com/spreadsheets/d/e/2PACX-1vT1g_CnA_BKGzkMwfbTEJ6CK68A6yl3T12izhCsM8vAf-RNeT7SF3WYiPNzcPA_fhaNG2q2mvEaIty_/pub?gid=702074641&single=true&output=csv";
+const API_URL =
+"https://script.google.com/macros/s/AKfycbzJrvL4BtToVHDBGcL9C1f-aUJgfle_SOEkZ6VlttXkqgKbgYssPgYL5xILBNw51VlycA/exec";
 
-let datos = [];
+let datosGlobales = [];
+
+function abreviarNombre(nombre){
+
+let partes = nombre.trim().split(" ");
+
+if(partes.length >= 2){
+
+return partes[0] + " " + partes[partes.length-2];
+
+}
+
+return nombre;
+
+}
 
 async function cargarDatos(){
 
-try{
+const respuesta = await fetch(API_URL);
 
-const respuesta =
-await fetch(CSV_URL);
+datosGlobales = await respuesta.json();
 
-const texto =
-await respuesta.text();
+llenarTiendas();
 
-const filas =
-texto.trim().split("\n");
-
-const encabezados =
-filas[0]
-.split(",")
-.map(h => h.trim());
-
-datos =
-filas.slice(1).map(fila=>{
-
-const valores =
-fila.split(",");
-
-let obj = {};
-
-encabezados.forEach((campo,index)=>{
-
-obj[campo] =
-(valores[index] || "")
-.replace(/"/g,"")
-.trim();
-
-});
-
-return obj;
-
-});
-
-cargarFiltros();
-actualizarDashboard();
-
-}
-catch(error){
-
-console.log(error);
-
-document.getElementById(
-"cardsContainer"
-).innerHTML =
-"<h2>Error cargando Google Sheets</h2>";
+mostrarVendedores("TODAS");
 
 }
 
-}
+function llenarTiendas(){
 
-function cargarFiltros(){
+const selector =
+document.getElementById("selectorTienda");
 
-const tiendas =
-[...new Set(
-datos.map(x=>x.TIENDA)
-)];
-
-const meses =
-[...new Set(
-datos.map(x=>x.MES)
-)];
-
-const filtroTienda =
-document.getElementById(
-"filtroTienda"
-);
-
-const filtroMes =
-document.getElementById(
-"filtroMes"
-);
-
-tiendas.sort();
-meses.sort();
+let tiendas =
+[...new Set(datosGlobales.map(x=>x.tienda))]
+.sort();
 
 tiendas.forEach(tienda=>{
 
 let option =
 document.createElement("option");
 
-option.value =
-tienda;
+option.value = tienda;
 
-option.textContent =
-tienda;
+option.textContent = tienda;
 
-filtroTienda.appendChild(
-option
-);
+selector.appendChild(option);
 
 });
 
-meses.forEach(mes=>{
+}
 
-let option =
-document.createElement("option");
+document
+.getElementById("selectorTienda")
+.addEventListener("change",function(){
 
-option.value =
-mes;
-
-option.textContent =
-mes;
-
-filtroMes.appendChild(
-option
-);
+mostrarVendedores(this.value);
 
 });
 
-filtroTienda.addEventListener(
-"change",
-actualizarDashboard
+function mostrarVendedores(tiendaSeleccionada){
+
+let datos =
+tiendaSeleccionada === "TODAS"
+? datosGlobales
+: datosGlobales.filter(
+x => x.tienda === tiendaSeleccionada
 );
 
-filtroMes.addEventListener(
-"change",
-actualizarDashboard
+datos.sort(
+(a,b)=>
+b.cumplimiento-a.cumplimiento
 );
+
+const cards =
+document.getElementById("cardsContainer");
+
+cards.innerHTML = "";
+
+const ranking =
+document.getElementById("rankingContainer");
+
+ranking.innerHTML = "";
+
+datos.forEach((v,index)=>{
+
+let porcentaje =
+Number(v.cumplimiento).toFixed(0);
+
+let colorBarra = "#ff4444";
+
+if(porcentaje >= 80){
+
+colorBarra = "#00b74a";
+
+}
+else if(porcentaje >= 60){
+
+colorBarra = "#ffbb33";
 
 }
 
-function actualizarDashboard(){
-
-const tienda =
-document.getElementById(
-"filtroTienda"
-).value;
-
-const mes =
-document.getElementById(
-"filtroMes"
-).value;
-
-let filtrados =
-datos.filter(item=>{
-
-let cumpleTienda =
-
-tienda === "TODAS"
-
-||
-
-item.TIENDA === tienda;
-
-let cumpleMes =
-
-mes === "TODOS"
-
-||
-
-item.MES === mes;
-
-return cumpleTienda &&
-cumpleMes;
-
-});
-
-generarKPIs(
-filtrados
-);
-
-generarTarjetas(
-filtrados
-);
-
-generarRanking(
-filtrados
-);
-
-generarTopTiendas(
-filtrados
-);
-
-generarAlertas(
-filtrados
-);
-
-}
-
-function generarKPIs(lista){
-
-let ventas = 0;
-let cumplimiento = 0;
-let comisiones = 0;
-
-lista.forEach(v=>{
-
-ventas +=
-Number(
-v.PRECIOFACTURANEGOCIADO
-) || 0;
-
-cumplimiento +=
-Number(
-v.CUMPLIMIENTO
-) || 0;
-
-comisiones +=
-Number(
-v.COMISION
-) || 0;
-
-});
-
-document.getElementById(
-"ventasTotales"
-).innerHTML =
-"$" +
-ventas.toLocaleString();
-
-document.getElementById(
-"cumplimientoPromedio"
-).innerHTML =
-
-lista.length > 0
-
-?
-
-Math.round(
-cumplimiento /
-lista.length
-) + "%"
-
-:
-
-"0%";
-
-document.getElementById(
-"comisionesTotales"
-).innerHTML =
-"$" +
-comisiones.toLocaleString();
-
-document.getElementById(
-"totalVendedores"
-).innerHTML =
-lista.length;
-
-}
-
-function generarTarjetas(lista){
-
-const container =
-document.getElementById(
-"cardsContainer"
-);
-
-container.innerHTML = "";
-
-lista.forEach(v=>{
-
-let ventas =
-Number(
-v.PRECIOFACTURANEGOCIADO
-) || 0;
-
-let meta =
-Number(
-v.META
-) || 0;
-
-let cumplimiento =
-Number(
-v.CUMPLIMIENTO
-) || 0;
-
-let faltante =
-Number(
-v["FALTANTE META"]
-) || 0;
-
-let comision =
-Number(
-v.COMISION
-) || 0;
-
-let color =
-"#ff4444";
-
-if(cumplimiento >= 100){
-
-color =
-"#00b74a";
-
-}
-else if(cumplimiento >= 90){
-
-color =
-"#ffbb33";
-
-}
-else if(cumplimiento >= 70){
-
-color =
-"#ff8800";
-
-}
-
-let alturaMeta =
-140;
+let alturaMeta = 140;
 
 let alturaVenta =
+(v.ventas / v.meta) * alturaMeta;
 
-meta > 0
+if(alturaVenta > 140){
 
-?
-
-(ventas/meta)
-*
-140
-
-:
-
-0;
-
-if(
-alturaVenta >
-140
-){
-
-alturaVenta =
-140;
+alturaVenta = 140;
 
 }
 
-container.innerHTML += `
+cards.innerHTML += `
 
 <div class="card">
 
 <div class="name">
-${v.VENDEDOR}
-</div>
 
-<div class="store">
-${v.TIENDA}
+${abreviarNombre(v.vendedor)}
+
 </div>
 
 <div class="percent">
-${cumplimiento}%
+
+${porcentaje}%
+
 </div>
 
 <div class="progress">
@@ -760,8 +537,8 @@ ${cumplimiento}%
 <div
 class="bar"
 style="
-width:${cumplimiento}%;
-background:${color};
+width:${porcentaje}%;
+background:${colorBarra};
 ">
 </div>
 
@@ -772,30 +549,51 @@ background:${color};
 <div class="info">
 
 <div class="box">
+
 <div class="label">
 VENTAS
 </div>
+
 <div class="value">
-$${ventas}
+$${Number(v.ventas).toFixed(2)}
 </div>
+
 </div>
 
 <div class="box">
+
 <div class="label">
 META
 </div>
+
 <div class="value">
-$${meta}
+$${Number(v.meta).toFixed(2)}
 </div>
+
 </div>
 
 <div class="box faltante-box">
+
 <div class="label">
 FALTANTE
 </div>
+
 <div class="value faltante-value">
-$${faltante}
+$${Number(v.faltante).toFixed(2)}
 </div>
+
+</div>
+
+<div class="box">
+
+<div class="label">
+PARES
+</div>
+
+<div class="value">
+${v.pares}
+</div>
+
 </div>
 
 </div>
@@ -808,9 +606,7 @@ $${faltante}
 
 <div
 class="chart-bar chart-ventas"
-style="
-height:${alturaVenta}px;
-">
+style="height:${alturaVenta}px">
 </div>
 
 <div class="chart-text">
@@ -823,9 +619,7 @@ VENTA
 
 <div
 class="chart-bar chart-meta"
-style="
-height:140px;
-">
+style="height:${alturaMeta}px">
 </div>
 
 <div class="chart-text">
@@ -840,121 +634,41 @@ META
 
 </div>
 
+<div class="alert">
+
+${porcentaje >= 100
+? "META CUMPLIDA"
+: "EN PROCESO"}
+
+</div>
+
 <div class="commission">
 
 COMISIÓN:
-$${comision}
+$${Number(v.comision).toFixed(2)}
 
 </div>
 
 </div>
 
 `;
-
-});
-
-}
-
-function generarRanking(lista){
-
-const ranking =
-document.getElementById(
-"rankingContainer"
-);
-
-ranking.innerHTML = "";
-
-let ordenados =
-[...lista].sort((a,b)=>
-
-(Number(b.CUMPLIMIENTO)||0)
-
--
-
-(Number(a.CUMPLIMIENTO)||0)
-
-);
-
-ordenados
-.slice(0,10)
-.forEach(v=>{
 
 ranking.innerHTML += `
 
-<div class="rank-item">
+<div class="rank-item
+${index===0 ? 'first' : ''}">
 
 <span>
-${v.VENDEDOR}
+
+${index+1}.
+${abreviarNombre(v.vendedor)}
+
 </span>
 
 <span>
-${v.CUMPLIMIENTO}%
-</span>
 
-</div>
+${porcentaje}%
 
-`;
-
-});
-
-}
-
-function generarTopTiendas(lista){
-
-const container =
-document.getElementById(
-"topTiendas"
-);
-
-container.innerHTML = "";
-
-let tiendas = {};
-
-lista.forEach(v=>{
-
-let tienda =
-v.TIENDA;
-
-if(!tiendas[tienda]){
-
-tiendas[tienda] = {
-ventas:0
-};
-
-}
-
-tiendas[tienda].ventas +=
-Number(
-v.PRECIOFACTURANEGOCIADO
-) || 0;
-
-});
-
-let rankingTiendas =
-Object.entries(tiendas)
-.sort((a,b)=>
-
-b[1].ventas -
-a[1].ventas
-
-);
-
-rankingTiendas
-.slice(0,10)
-.forEach(t=>{
-
-container.innerHTML += `
-
-<div class="rank-item">
-
-<span>
-${t[0]}
-</span>
-
-<span>
-$${Math.round(
-t[1].ventas
-)}
 </span>
 
 </div>
@@ -963,96 +677,43 @@ t[1].ventas
 
 });
 
-}
+let totalVentas = 0;
+let totalMeta = 0;
+let totalPares = 0;
+let totalComisiones = 0;
 
-function generarAlertas(lista){
+datos.forEach(v=>{
 
-const container =
-document.getElementById(
-"alertasSupervisor"
-);
+totalVentas += Number(v.ventas);
+totalMeta += Number(v.meta);
+totalPares += Number(v.pares);
+totalComisiones += Number(v.comision);
 
-container.innerHTML = "";
+});
 
-let bajo70 =
-lista.filter(v=>
+let cumplimientoGeneral = 0;
 
-(Number(
-v.CUMPLIMIENTO
-)||0)
+if(totalMeta > 0){
 
-<
-
-70
-
-);
-
-let sobre100 =
-lista.filter(v=>
-
-(Number(
-v.CUMPLIMIENTO
-)||0)
-
->=
-
-100
-
-);
-
-if(
-bajo70.length > 0
-){
-
-container.innerHTML += `
-
-<div class="alert-card">
-
-${bajo70.length}
- vendedores están por debajo
-del 70% de cumplimiento.
-
-</div>
-
-`;
+cumplimientoGeneral =
+(totalVentas / totalMeta) * 100;
 
 }
 
-if(
-sobre100.length > 0
-){
+document.getElementById("totalVentas").innerText =
+"$" + totalVentas.toFixed(2);
 
-container.innerHTML += `
+document.getElementById("totalMeta").innerText =
+"$" + totalMeta.toFixed(2);
 
-<div class="alert-card">
+document.getElementById("totalCumplimiento").innerText =
+cumplimientoGeneral.toFixed(2) + "%";
 
-${sobre100.length}
- vendedores ya superaron
-su meta.
+document.getElementById("totalPares").innerText =
+totalPares;
 
-</div>
-
-`;
-
-}
-
-if(
-bajo70.length === 0
-&&
-sobre100.length === 0
-){
-
-container.innerHTML += `
-
-<div class="alert-card">
-
-Sin alertas importantes.
-
-</div>
-
-`;
-
-}
+document.getElementById("totalComisiones").innerText =
+"$" + totalComisiones.toFixed(2);
 
 }
 
@@ -1061,4 +722,5 @@ cargarDatos();
 </script>
 
 </body>
+
 </html>
